@@ -76,26 +76,40 @@ const container = document.getElementById("list")
 
 let render = (val) => {
 
-    console.log(val)
-    let element = document.getElementById(val)
-    let label = document.getElementById("container" + val)
-    console.log(label)
-    if (val == 1) {
-        element.style = `display: flex; justify-content: space-between; width: 91%; border: 2px solid #007F61;  border-radius: 6px; margin-top: 35px; background-color: #F4FBF9`
-        label.innerHTML = table
-    } else if (val == 2) {
-        element.style = `display: flex; justify-content: space-between; width: 91%; border: 2px solid #007F61;  border-radius: 6px; margin-top: 35px; background-color: #F4FBF9`
-        label.innerHTML = table
-    } else if (val == 3) {
-        element.style = `display: flex; justify-content: space-between; width: 91%; border: 2px solid #007F61;  border-radius: 6px; margin-top: 35px; background-color: #F4FBF9`
-        label.innerHTML = table
-    }
+    document.getElementsByName("radio").forEach((radioElement, index) => {
+        let element = document.getElementById(index + 1);
+        let label = document.getElementById("container" + (index + 1));
+        if (radioElement.checked === false) {
+            element.style = `display: flex; justify-content: space-between; width: 91%; border: 2px solid #C8C8C8;  border-radius: 6px; margin-top: 35px;`;
+            label.innerHTML = "";
+        } else {
+            element.style = `display: flex; justify-content: space-between; width: 91%; border: 2px solid #007F61;  border-radius: 6px; margin-top: 35px; background-color: #F4FBF9`;
+            label.innerHTML = table;
+        }
+    });
 
 }
 
 
 function addToCart() {
-    alert("Added to cart successfully!")
+    let message = "Please Select A Product!";
+
+    let index = 0;
+    document.getElementsByName("radio").forEach((radioElement, radioIndex) => {
+        if (radioElement.checked === true) {
+            index = radioIndex + 1;
+        }
+    });
+
+    if (index === 1) {
+        message = "1 Pair for DKK 195.00 Added To Cart!";
+    } else if (index === 2) {
+        message = "2 Pair for DKK 345.00 Added To Cart!";
+    } else if (index === 3) {
+        message = "3 Pair for DKK 582.00 Added To Cart!";
+    }
+
+    alert(message);
 }
 
 
